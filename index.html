@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -6,59 +7,72 @@
 <title>Bulldog Field Log</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:monospace;background:#0f0f0f;color:#e5e5e5;min-height:100vh}
-.header{background:#0f0f0f;border-bottom:1px solid #1e1e1e;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.logo{font-size:18px;font-weight:bold;letter-spacing:2px;color:#fff}
-.dot{width:8px;height:8px;background:#ef4444;border-radius:50%;display:inline-block;margin-right:8px;box-shadow:0 0 8px #ef4444}
-nav{display:flex;gap:4px}
-.nav-btn{background:none;border:none;color:#888;font-family:monospace;font-size:11px;letter-spacing:1px;cursor:pointer;padding:8px 12px;border-radius:4px;text-transform:uppercase}
+body{font-family:monospace;background:#0a0a0a;color:#e5e5e5;min-height:100vh}
+.header{background:#0f0f0f;border-bottom:1px solid #1e1e1e;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{font-size:16px;font-weight:bold;letter-spacing:2px;color:#fff;display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;background:#ef4444;border-radius:50%;box-shadow:0 0 8px #ef4444;flex-shrink:0}
+nav{display:flex;gap:2px}
+.nav-btn{background:none;border:none;color:#666;font-family:monospace;font-size:10px;letter-spacing:1px;cursor:pointer;padding:7px 10px;border-radius:4px;text-transform:uppercase}
 .nav-btn:hover{color:#e5e5e5;background:#1e1e1e}
 .nav-btn.active{color:#ef4444;border-bottom:2px solid #ef4444;border-radius:0}
-.container{max-width:800px;margin:0 auto;padding:24px 16px}
-.stat-card{background:#161616;border:1px solid #222;border-radius:8px;padding:20px;position:relative;overflow:hidden;margin-bottom:0}
+.container{max-width:800px;margin:0 auto;padding:20px 16px}
+.stat-card{background:#161616;border:1px solid #222;border-radius:8px;padding:16px;position:relative;overflow:hidden}
 .stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent,#ef4444)}
-.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
-.stat-num{font-size:32px;font-weight:bold;color:#fff;line-height:1}
-.stat-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;margin-bottom:6px}
-.stat-sub{font-size:11px;color:#555;margin-top:4px}
-.progress-bar{height:6px;background:#1e1e1e;border-radius:3px;overflow:hidden;margin:8px 0 4px}
-.progress-fill{height:100%;background:linear-gradient(90deg,#ef4444,#f97316);border-radius:3px;transition:width 0.6s}
-.section-title{font-size:24px;font-weight:bold;letter-spacing:2px;color:#fff;margin-bottom:4px}
-.section-sub{font-size:11px;letter-spacing:2px;color:#ef4444;text-transform:uppercase;margin-bottom:16px}
-.card{background:#161616;border:1px solid #1e1e1e;border-radius:8px;padding:20px;margin-bottom:12px}
-.field-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;margin-bottom:6px;display:block}
-.field-input{width:100%;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:6px;padding:10px 12px;color:#e5e5e5;font-family:monospace;font-size:13px;outline:none;transition:border-color 0.2s}
-.field-input:focus{border-color:#ef4444}
-.field-input::placeholder{color:#444}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.stat-num{font-size:28px;font-weight:bold;color:#fff;line-height:1}
+.stat-label{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#666;margin-bottom:4px}
+.stat-sub{font-size:10px;color:#555;margin-top:3px}
+.progress-bar{height:5px;background:#1e1e1e;border-radius:3px;overflow:hidden;margin:8px 0 4px}
+.progress-fill{height:100%;background:linear-gradient(90deg,#ef4444,#f97316);border-radius:3px;transition:width 0.6s}
+.section-title{font-size:22px;font-weight:bold;letter-spacing:2px;color:#fff;margin-bottom:4px}
+.section-sub{font-size:10px;letter-spacing:2px;color:#ef4444;text-transform:uppercase;margin-bottom:14px}
+.field-label{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#666;margin-bottom:5px;display:block}
+.field-input{width:100%;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:6px;padding:9px 12px;color:#e5e5e5;font-family:monospace;font-size:13px;outline:none;transition:border-color 0.2s}
+.field-input:focus{border-color:#ef4444}
+.field-input::placeholder{color:#3a3a3a}
 .field-group{margin-bottom:12px}
-.btn-primary{background:#ef4444;color:#fff;border:none;border-radius:6px;padding:12px 24px;font-family:monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;cursor:pointer}
+.pay-preview{background:#0d2218;border:1px solid #16a34a44;border-radius:8px;padding:14px;margin-bottom:14px;display:none}
+.pay-row{display:flex;justify-content:space-between;font-size:12px;padding:3px 0}
+.pay-row.total{border-top:1px solid #1e4d30;margin-top:8px;padding-top:8px;font-weight:bold;font-size:14px}
+.pay-key{color:#555}
+.pay-val{color:#22c55e}
+.pay-val.total{color:#4ade80;font-size:16px}
+.btn-primary{background:#ef4444;color:#fff;border:none;border-radius:6px;padding:11px 22px;font-family:monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:background 0.2s}
 .btn-primary:hover{background:#dc2626}
-.btn-ghost{background:none;border:1px solid #2a2a2a;color:#888;border-radius:6px;padding:10px 18px;font-family:monospace;font-size:12px;cursor:pointer;margin-left:8px}
+.btn-ghost{background:none;border:1px solid #2a2a2a;color:#777;border-radius:6px;padding:9px 16px;font-family:monospace;font-size:11px;cursor:pointer;margin-left:8px;transition:all 0.2s}
 .btn-ghost:hover{border-color:#555;color:#e5e5e5}
-.entry-row{background:#161616;border:1px solid #1e1e1e;border-radius:8px;padding:14px 16px;cursor:pointer;margin-bottom:8px;transition:all 0.2s}
+.btn-save{background:#16a34a;color:#fff;border:none;border-radius:6px;padding:11px 22px;font-family:monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer}
+.btn-save:hover{background:#15803d}
+.entry-row{background:#161616;border:1px solid #1e1e1e;border-radius:8px;padding:14px 16px;margin-bottom:8px;transition:all 0.2s;cursor:pointer}
 .entry-row:hover{border-color:#333;background:#1a1a1a}
-.entry-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px}
+.entry-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
 .entry-location{font-size:13px;color:#e5e5e5;font-weight:bold}
-.entry-date{font-size:11px;color:#666}
-.entry-work{font-size:11px;color:#555;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80%}
-.entry-right{text-align:right;min-width:60px}
-.entry-hours{font-size:13px;color:#fff}
-.entry-pay{font-size:11px;color:#22c55e}
-.badge{font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:20px;display:inline-block;margin-top:4px}
-.earnings-preview{background:#16a34a22;border:1px solid #16a34a44;border-radius:6px;padding:10px 14px;font-size:12px;color:#86efac;margin-bottom:12px}
-.detail-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #1e1e1e;font-size:13px}
+.entry-date{font-size:10px;color:#555;margin-top:2px}
+.entry-work{font-size:11px;color:#555;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:4px}
+.entry-right{text-align:right;min-width:70px;flex-shrink:0}
+.entry-hours{font-size:12px;color:#aaa}
+.entry-pay{font-size:13px;color:#22c55e;font-weight:bold}
+.badge{font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:20px;display:inline-block;margin-top:5px}
+.detail-row{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid #1a1a1a;font-size:13px}
 .detail-row:last-child{border-bottom:none}
-.detail-key{color:#555;font-size:11px;text-transform:uppercase;letter-spacing:1px}
-.detail-val{color:#e5e5e5;text-align:right;max-width:60%}
-.btn-delete{background:none;border:1px solid #7f1d1d;color:#ef4444;border-radius:6px;padding:8px 16px;font-family:monospace;font-size:11px;cursor:pointer;margin-top:16px}
-.empty{text-align:center;padding:60px 0;color:#444}
-.empty-icon{font-size:48px;margin-bottom:12px}
-.toast{position:fixed;bottom:24px;right:16px;left:16px;padding:12px 16px;border-radius:8px;font-size:12px;z-index:9999;text-align:center}
+.detail-key{color:#555;font-size:10px;text-transform:uppercase;letter-spacing:1px}
+.detail-val{color:#e5e5e5;text-align:right;max-width:65%;word-break:break-word}
+.card{background:#161616;border:1px solid #1e1e1e;border-radius:8px;padding:18px;margin-bottom:10px}
+.btn-delete{background:none;border:1px solid #7f1d1d;color:#ef4444;border-radius:6px;padding:8px 14px;font-family:monospace;font-size:10px;cursor:pointer;margin-top:14px}
+.btn-edit{background:none;border:1px solid #1d4ed8;color:#60a5fa;border-radius:6px;padding:8px 14px;font-family:monospace;font-size:10px;cursor:pointer;margin-top:14px;margin-right:8px}
+.empty{text-align:center;padding:50px 0;color:#333}
+.empty-icon{font-size:44px;margin-bottom:10px}
+.toast{position:fixed;bottom:20px;right:16px;left:16px;padding:12px 16px;border-radius:8px;font-size:12px;z-index:9999;text-align:center;display:none}
 .toast.success{background:#166534;border:1px solid #16a34a;color:#86efac}
 .toast.error{background:#7f1d1d;border:1px solid #dc2626;color:#fca5a5}
 .hidden{display:none}
 select option{background:#1a1a1a}
+.photo-link{color:#60a5fa;font-size:12px;text-decoration:none;display:inline-block;margin-top:6px}
+.photo-link:hover{color:#93c5fd}
+.summary-bar{display:flex;gap:20px;padding:10px 14px;background:#161616;border-radius:6px;font-size:11px;color:#555;margin-bottom:12px;flex-wrap:wrap}
+.edit-banner{background:#1d3a6e;border:1px solid #1d4ed8;border-radius:6px;padding:10px 14px;font-size:11px;color:#93c5fd;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
+.ot-badge{background:#f9731622;color:#f97316;font-size:9px;letter-spacing:1px;padding:2px 6px;border-radius:4px;margin-left:6px;text-transform:uppercase}
 </style>
 </head>
 <body>
@@ -75,47 +89,65 @@ select option{background:#1a1a1a}
 <div class="container">
 
   <!-- DASHBOARD -->
+
   <div id="view-dashboard">
-    <div style="margin-bottom:20px">
+    <div style="margin-bottom:18px">
       <div class="section-sub">Field Technician</div>
       <div class="section-title">WORK OVERVIEW</div>
     </div>
     <div class="grid3">
       <div class="stat-card" style="--accent:#ef4444">
-        <div class="stat-label">Total Hours</div>
-        <div class="stat-num" id="dash-hours">0</div>
-        <div class="stat-sub">hours logged</div>
+        <div class="stat-label">Regular Hrs</div>
+        <div class="stat-num" id="dash-reg-hours">0</div>
+        <div class="stat-sub">@ $24.00/hr</div>
+      </div>
+      <div class="stat-card" style="--accent:#f97316">
+        <div class="stat-label">OT Hours</div>
+        <div class="stat-num" id="dash-ot-hours">0</div>
+        <div class="stat-sub">@ $36.00/hr</div>
       </div>
       <div class="stat-card" style="--accent:#22c55e">
-        <div class="stat-label">Earnings</div>
-        <div class="stat-num" style="font-size:22px" id="dash-earnings">$0</div>
+        <div class="stat-label">Total Earned</div>
+        <div class="stat-num" style="font-size:20px" id="dash-earnings">$0</div>
         <div class="stat-sub">gross logged</div>
       </div>
+    </div>
+    <div class="grid2" style="margin-bottom:12px">
       <div class="stat-card" style="--accent:#3b82f6">
-        <div class="stat-label">Jobs</div>
+        <div class="stat-label">Total Hours</div>
+        <div class="stat-num" id="dash-total-hours">0</div>
+        <div class="stat-sub">reg + OT combined</div>
+      </div>
+      <div class="stat-card" style="--accent:#8b5cf6">
+        <div class="stat-label">Jobs Logged</div>
         <div class="stat-num" id="dash-jobs">0</div>
-        <div class="stat-sub">entries</div>
+        <div class="stat-sub">total entries</div>
       </div>
     </div>
     <div class="stat-card" style="--accent:#f97316;margin-bottom:16px">
       <div style="display:flex;justify-content:space-between;align-items:flex-end">
         <div>
           <div class="stat-label">NICET Level I Progress</div>
-          <div style="font-size:12px;color:#aaa">~480 hours needed (3 months)</div>
+          <div style="font-size:11px;color:#666;margin-top:2px">~480 hours needed (3 months)</div>
         </div>
-        <div style="font-size:24px;font-weight:bold;color:#f97316" id="dash-pct">0%</div>
+        <div style="font-size:22px;font-weight:bold;color:#f97316" id="dash-pct">0%</div>
       </div>
       <div class="progress-bar"><div class="progress-fill" id="dash-bar" style="width:0%"></div></div>
-      <div style="font-size:11px;color:#555" id="dash-bar-label">0 / 480 hours</div>
+      <div style="font-size:10px;color:#444;margin-top:4px" id="dash-bar-label">0 / 480 hours</div>
     </div>
     <div id="dash-recent"></div>
   </div>
 
-  <!-- ADD ENTRY -->
+  <!-- ADD / EDIT ENTRY -->
+
   <div id="view-add" class="hidden">
-    <div style="margin-bottom:20px">
-      <div class="section-sub">New Entry</div>
-      <div class="section-title">LOG WORK DAY</div>
+    <div style="margin-bottom:18px">
+      <div class="section-sub" id="form-mode-label">New Entry</div>
+      <div class="section-title" id="form-title-label">LOG WORK DAY</div>
+    </div>
+    <div id="edit-banner" class="edit-banner hidden">
+      <span>✏️ Editing existing entry</span>
+      <button class="btn-ghost" style="margin:0;padding:5px 10px;font-size:10px" onclick="cancelEdit()">Cancel Edit</button>
     </div>
     <div class="grid2">
       <div>
@@ -132,171 +164,275 @@ select option{background:#1a1a1a}
           <option>Other</option>
         </select>
       </div>
-      <div>
-        <label class="field-label">Hours Worked *</label>
-        <input type="number" step="0.5" min="0" placeholder="8.5" class="field-input" id="f-hours" oninput="updateEarnings()"/>
-      </div>
-      <div>
-        <label class="field-label">Hourly Pay ($)</label>
-        <input type="number" step="0.01" min="0" placeholder="22.00" class="field-input" id="f-pay" oninput="updateEarnings()"/>
-      </div>
-    </div>
-    <div id="earnings-preview" class="earnings-preview hidden"></div>
-    <div class="field-group">
-      <label class="field-label">Job Location / Company Name *</label>
-      <input type="text" placeholder="e.g. Riverside Elementary School" class="field-input" id="f-location"/>
-    </div>
-    <div class="field-group">
-      <label class="field-label">Jobsite Address</label>
-      <input type="text" placeholder="123 Main St, Chicago, IL" class="field-input" id="f-address"/>
-    </div>
-    <div class="field-group">
-      <label class="field-label">Project Duration</label>
-      <input type="text" placeholder="e.g. 3 days, 2 weeks" class="field-input" id="f-duration"/>
-    </div>
-    <div class="field-group">
-      <label class="field-label">Work Performed *</label>
-      <textarea rows="4" placeholder="Describe tasks: device installation, wiring, panel programming, testing..." class="field-input" id="f-work" style="resize:vertical"></textarea>
     </div>
     <div class="grid2">
       <div>
-        <label class="field-label">Site Contact Name</label>
-        <input type="text" placeholder="John Smith" class="field-input" id="f-contact"/>
+        <label class="field-label">Regular Hours *</label>
+        <input type="number" step="0.5" min="0" placeholder="8" class="field-input" id="f-reg-hours" oninput="updatePay()"/>
       </div>
       <div>
-        <label class="field-label">Supervisor / Lead Tech</label>
-        <input type="text" placeholder="Supervisor name" class="field-input" id="f-supervisor"/>
-      </div>
-      <div>
-        <label class="field-label">Permit / Job Number</label>
-        <input type="text" placeholder="Permit # or job #" class="field-input" id="f-permit"/>
-      </div>
-      <div>
-        <label class="field-label">Equipment Used</label>
-        <input type="text" placeholder="Drill, multimeter..." class="field-input" id="f-equipment"/>
+        <label class="field-label">OT Hours</label>
+        <input type="number" step="0.5" min="0" placeholder="0" class="field-input" id="f-ot-hours" oninput="updatePay()"/>
       </div>
     </div>
-    <div class="field-group">
-      <label class="field-label">Additional Notes</label>
-      <textarea rows="3" placeholder="Anything else worth documenting..." class="field-input" id="f-notes" style="resize:vertical"></textarea>
-    </div>
-    <div style="margin-top:8px">
-      <button class="btn-primary" onclick="saveEntry()">Save Entry</button>
-      <button class="btn-ghost" onclick="showView('dashboard')">Cancel</button>
-    </div>
+
+```
+<!-- Pay Preview -->
+<div class="pay-preview" id="pay-preview">
+  <div class="pay-row"><span class="pay-key">Regular Pay</span><span class="pay-val" id="prev-reg">$0.00</span></div>
+  <div class="pay-row"><span class="pay-key">OT Pay <span class="ot-badge">1.5x</span></span><span class="pay-val" id="prev-ot">$0.00</span></div>
+  <div class="pay-row total"><span class="pay-key">Day Total</span><span class="pay-val total" id="prev-total">$0.00</span></div>
+</div>
+
+<div class="field-group">
+  <label class="field-label">Job Location / Company Name *</label>
+  <input type="text" placeholder="e.g. Wardzala Industries" class="field-input" id="f-location"/>
+</div>
+<div class="field-group">
+  <label class="field-label">Jobsite Address</label>
+  <input type="text" placeholder="123 Main St, Schiller Park, IL" class="field-input" id="f-address"/>
+</div>
+<div class="field-group">
+  <label class="field-label">Project Duration</label>
+  <input type="text" placeholder="e.g. 3 days, 2 weeks" class="field-input" id="f-duration"/>
+</div>
+<div class="field-group">
+  <label class="field-label">Work Performed *</label>
+  <textarea rows="4" placeholder="Describe tasks: device installation, wiring, panel programming, testing..." class="field-input" id="f-work" style="resize:vertical"></textarea>
+</div>
+<div class="grid2">
+  <div>
+    <label class="field-label">Site Contact Name</label>
+    <input type="text" placeholder="John Smith" class="field-input" id="f-contact"/>
+  </div>
+  <div>
+    <label class="field-label">Supervisor / Lead Tech</label>
+    <input type="text" placeholder="Supervisor name" class="field-input" id="f-supervisor"/>
+  </div>
+</div>
+<div class="field-group">
+  <label class="field-label">Google Drive Photo Link</label>
+  <input type="url" placeholder="Paste Google Drive photo link here" class="field-input" id="f-photo"/>
+  <div style="font-size:10px;color:#444;margin-top:5px">Take photo → Upload to Google Drive → Share link → Paste above</div>
+</div>
+<div class="field-group">
+  <label class="field-label">Additional Notes</label>
+  <textarea rows="3" placeholder="Anything else worth documenting..." class="field-input" id="f-notes" style="resize:vertical"></textarea>
+</div>
+<div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:8px">
+  <button class="btn-primary" id="save-btn" onclick="saveEntry()">Save Entry</button>
+  <button class="btn-save hidden" id="update-btn" onclick="updateEntry()">Update Entry</button>
+  <button class="btn-ghost" style="margin:0" onclick="cancelEdit()">Cancel</button>
+</div>
+```
+
   </div>
 
   <!-- LOG LIST -->
+
   <div id="view-log" class="hidden">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:16px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px">
       <div>
         <div class="section-sub">History</div>
         <div class="section-title">ALL ENTRIES</div>
       </div>
       <button class="btn-primary" onclick="showView('add')">+ New</button>
     </div>
-    <div id="log-summary" style="font-size:12px;color:#666;margin-bottom:12px"></div>
+    <div class="summary-bar" id="log-summary"></div>
     <div id="log-list"></div>
   </div>
 
   <!-- DETAIL -->
+
   <div id="view-detail" class="hidden">
-    <button class="btn-ghost" style="margin-bottom:16px;padding:6px 12px;font-size:11px" onclick="showView('log')">← Back</button>
+    <button class="btn-ghost" style="margin-bottom:14px;padding:6px 12px;font-size:10px;margin-left:0" onclick="showView('log')">← Back</button>
     <div id="detail-content"></div>
   </div>
 
 </div>
 
-<div id="toast" class="toast hidden"></div>
+<div id="toast" class="toast"></div>
 
 <script>
+const REG_RATE = 24;
+const OT_RATE = 36;
 const COLORS = {'Fire Alarm':'#ef4444','Security Camera':'#3b82f6','Access Control':'#8b5cf6','Both Fire & Security':'#f97316','Other':'#6b7280'};
 let entries = [];
-let currentDetail = null;
+let editingId = null;
 
 function load(){
-  try{const s=localStorage.getItem('bulldog_log');if(s)entries=JSON.parse(s);}catch(e){}
-  // set today's date
+  try{const s=localStorage.getItem('bulldog_log_v2');if(s)entries=JSON.parse(s);}catch(e){}
+  // migrate old entries if any
+  try{const old=localStorage.getItem('bulldog_log');if(old){const o=JSON.parse(old);if(o.length&&!entries.length){entries=o.map(e=>({...e,regHours:e.hours||0,otHours:0}));save();}}}catch(e){}
   document.getElementById('f-date').value=new Date().toISOString().split('T')[0];
   renderDashboard();
 }
 
-function save(){try{localStorage.setItem('bulldog_log',JSON.stringify(entries));}catch(e){}}
+function save(){try{localStorage.setItem('bulldog_log_v2',JSON.stringify(entries));}catch(e){}}
 
 function fmt$(n){const v=parseFloat(n);return isNaN(v)?'$0.00':'$'+v.toFixed(2);}
-function fmtH(n){const v=parseFloat(n);return isNaN(v)?'0h':v+'h';}
-function totalHours(){return entries.reduce((s,e)=>s+(parseFloat(e.hours)||0),0);}
-function totalEarnings(){return entries.reduce((s,e)=>s+(parseFloat(e.hours)||0)*(parseFloat(e.pay)||0),0);}
+function fmtH(n){const v=parseFloat(n);return isNaN(v)?'0':parseFloat(v.toFixed(1)).toString();}
+
+function totalRegHours(){return entries.reduce((s,e)=>s+(parseFloat(e.regHours)||0),0);}
+function totalOtHours(){return entries.reduce((s,e)=>s+(parseFloat(e.otHours)||0),0);}
+function totalHours(){return totalRegHours()+totalOtHours();}
+function totalEarnings(){return entries.reduce((s,e)=>s+(parseFloat(e.regHours)||0)*REG_RATE+(parseFloat(e.otHours)||0)*OT_RATE,0);}
+function dayEarnings(e){return (parseFloat(e.regHours)||0)*REG_RATE+(parseFloat(e.otHours)||0)*OT_RATE;}
 
 function showView(v){
-  ['dashboard','add','log','detail'].forEach(x=>{
-    document.getElementById('view-'+x).classList.add('hidden');
-  });
+  ['dashboard','add','log','detail'].forEach(x=>document.getElementById('view-'+x).classList.add('hidden'));
   document.getElementById('view-'+v).classList.remove('hidden');
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   const map={dashboard:0,add:1,log:2};
-  if(map[v]!==undefined) document.querySelectorAll('.nav-btn')[map[v]].classList.add('active');
-  if(v==='dashboard') renderDashboard();
-  if(v==='log') renderLog();
+  if(map[v]!==undefined)document.querySelectorAll('.nav-btn')[map[v]].classList.add('active');
+  if(v==='dashboard')renderDashboard();
+  if(v==='log')renderLog();
+  if(v==='add'&&!editingId)resetForm();
 }
 
-function updateEarnings(){
-  const h=parseFloat(document.getElementById('f-hours').value)||0;
-  const p=parseFloat(document.getElementById('f-pay').value)||0;
-  const el=document.getElementById('earnings-preview');
-  if(h&&p){el.textContent='Day earnings: '+fmt$(h*p);el.classList.remove('hidden');}
-  else el.classList.add('hidden');
+function updatePay(){
+  const reg=parseFloat(document.getElementById('f-reg-hours').value)||0;
+  const ot=parseFloat(document.getElementById('f-ot-hours').value)||0;
+  const preview=document.getElementById('pay-preview');
+  if(reg>0||ot>0){
+    preview.style.display='block';
+    document.getElementById('prev-reg').textContent=fmt$(reg*REG_RATE);
+    document.getElementById('prev-ot').textContent=fmt$(ot*OT_RATE);
+    document.getElementById('prev-total').textContent=fmt$(reg*REG_RATE+ot*OT_RATE);
+  } else {
+    preview.style.display='none';
+  }
+}
+
+function resetForm(){
+  editingId=null;
+  document.getElementById('form-mode-label').textContent='New Entry';
+  document.getElementById('form-title-label').textContent='LOG WORK DAY';
+  document.getElementById('edit-banner').classList.add('hidden');
+  document.getElementById('save-btn').classList.remove('hidden');
+  document.getElementById('update-btn').classList.add('hidden');
+  document.getElementById('pay-preview').style.display='none';
+  ['f-location','f-reg-hours','f-ot-hours','f-address','f-duration','f-work','f-contact','f-supervisor','f-photo','f-notes'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('f-date').value=new Date().toISOString().split('T')[0];
+  document.getElementById('f-type').value='Fire Alarm';
+}
+
+function cancelEdit(){
+  resetForm();
+  showView(editingId?'log':'dashboard');
+}
+
+function getFormData(){
+  return {
+    date:document.getElementById('f-date').value,
+    type:document.getElementById('f-type').value,
+    regHours:document.getElementById('f-reg-hours').value,
+    otHours:document.getElementById('f-ot-hours').value||'0',
+    location:document.getElementById('f-location').value.trim(),
+    address:document.getElementById('f-address').value.trim(),
+    duration:document.getElementById('f-duration').value.trim(),
+    work:document.getElementById('f-work').value.trim(),
+    contact:document.getElementById('f-contact').value.trim(),
+    supervisor:document.getElementById('f-supervisor').value.trim(),
+    photo:document.getElementById('f-photo').value.trim(),
+    notes:document.getElementById('f-notes').value.trim()
+  };
+}
+
+function validateForm(data){
+  if(!data.date||!data.location||!data.regHours||!data.work){
+    showToast('Fill in Date, Location, Regular Hours, and Work Performed.','error');
+    return false;
+  }
+  return true;
 }
 
 function saveEntry(){
-  const date=document.getElementById('f-date').value;
-  const location=document.getElementById('f-location').value.trim();
-  const hours=document.getElementById('f-hours').value;
-  const work=document.getElementById('f-work').value.trim();
-  if(!date||!location||!hours||!work){showToast('Fill in Date, Location, Hours, and Work Performed.','error');return;}
-  const entry={
-    id:Date.now(),date,location,hours,pay:document.getElementById('f-pay').value,
-    type:document.getElementById('f-type').value,address:document.getElementById('f-address').value,
-    duration:document.getElementById('f-duration').value,work,contact:document.getElementById('f-contact').value,
-    supervisor:document.getElementById('f-supervisor').value,permit:document.getElementById('f-permit').value,
-    equipment:document.getElementById('f-equipment').value,notes:document.getElementById('f-notes').value
-  };
-  entries.unshift(entry);save();
-  ['f-location','f-hours','f-pay','f-address','f-duration','f-work','f-contact','f-supervisor','f-permit','f-equipment','f-notes'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('earnings-preview').classList.add('hidden');
+  const data=getFormData();
+  if(!validateForm(data))return;
+  entries.unshift({...data,id:Date.now()});
+  save();resetForm();
   showView('dashboard');showToast('Entry saved!');
 }
 
+function updateEntry(){
+  const data=getFormData();
+  if(!validateForm(data))return;
+  const idx=entries.findIndex(e=>e.id===editingId);
+  if(idx>-1){entries[idx]={...entries[idx],...data};save();}
+  editingId=null;resetForm();
+  showView('log');showToast('Entry updated!');
+}
+
+function editEntry(id){
+  const e=entries.find(x=>x.id===id);if(!e)return;
+  editingId=id;
+  document.getElementById('form-mode-label').textContent='Edit Entry';
+  document.getElementById('form-title-label').textContent='UPDATE LOG';
+  document.getElementById('edit-banner').classList.remove('hidden');
+  document.getElementById('save-btn').classList.add('hidden');
+  document.getElementById('update-btn').classList.remove('hidden');
+  document.getElementById('f-date').value=e.date||'';
+  document.getElementById('f-type').value=e.type||'Fire Alarm';
+  document.getElementById('f-reg-hours').value=e.regHours||e.hours||'';
+  document.getElementById('f-ot-hours').value=e.otHours||'0';
+  document.getElementById('f-location').value=e.location||'';
+  document.getElementById('f-address').value=e.address||'';
+  document.getElementById('f-duration').value=e.duration||'';
+  document.getElementById('f-work').value=e.work||'';
+  document.getElementById('f-contact').value=e.contact||'';
+  document.getElementById('f-supervisor').value=e.supervisor||'';
+  document.getElementById('f-photo').value=e.photo||'';
+  document.getElementById('f-notes').value=e.notes||'';
+  updatePay();
+  showView('add');
+}
+
 function renderDashboard(){
-  const h=totalHours();const e=totalEarnings();const pct=Math.min(h/480*100,100);
-  document.getElementById('dash-hours').textContent=h.toFixed(1);
-  document.getElementById('dash-earnings').textContent=fmt$(e);
+  const regH=totalRegHours();const otH=totalOtHours();const totH=totalHours();
+  const earn=totalEarnings();const pct=Math.min(totH/480*100,100);
+  document.getElementById('dash-reg-hours').textContent=fmtH(regH);
+  document.getElementById('dash-ot-hours').textContent=fmtH(otH);
+  document.getElementById('dash-earnings').textContent=fmt$(earn);
+  document.getElementById('dash-total-hours').textContent=fmtH(totH);
   document.getElementById('dash-jobs').textContent=entries.length;
   document.getElementById('dash-pct').textContent=pct.toFixed(0)+'%';
   document.getElementById('dash-bar').style.width=pct+'%';
-  document.getElementById('dash-bar-label').textContent=h.toFixed(1)+' / 480 hours';
+  document.getElementById('dash-bar-label').textContent=fmtH(totH)+' / 480 hours';
   const el=document.getElementById('dash-recent');
-  if(entries.length===0){el.innerHTML='<div class="empty"><div class="empty-icon">📋</div><div>No entries yet. Log your first day Monday.</div><br><button class="btn-primary" onclick="showView(\'add\')">+ Log First Entry</button></div>';return;}
+  if(entries.length===0){
+    el.innerHTML='<div class="empty"><div class="empty-icon">📋</div><div style="font-size:13px">No entries yet. Log your first day.</div><br><button class="btn-primary" onclick="showView(\'add\')">+ Log First Entry</button></div>';
+    return;
+  }
   const recent=entries.slice(0,3);
-  el.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#666">Recent Entries</span><button class="btn-ghost" style="padding:5px 12px;font-size:11px" onclick="showView(\'log\')">View All</button></div>'+recent.map(e=>entryRowHTML(e)).join('');
+  el.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#555">Recent Entries</span><button class="btn-ghost" style="padding:5px 10px;font-size:10px;margin:0" onclick="showView(\'log\')">View All</button></div>'+recent.map(e=>entryRowHTML(e)).join('');
 }
 
 function renderLog(){
   const el=document.getElementById('log-list');
   const summary=document.getElementById('log-summary');
-  const h=totalHours();const earn=totalEarnings();
-  summary.textContent=entries.length+' entries — '+h.toFixed(1)+'h total — '+fmt$(earn)+' earned';
-  if(entries.length===0){el.innerHTML='<div class="empty"><div class="empty-icon">📋</div><div>No entries yet.</div></div>';return;}
+  const regH=totalRegHours();const otH=totalOtHours();const earn=totalEarnings();
+  summary.innerHTML=`<span><span style="color:#fff">${entries.length}</span> entries</span><span><span style="color:#fff">${fmtH(regH)}h</span> regular</span><span><span style="color:#f97316">${fmtH(otH)}h</span> OT</span><span><span style="color:#22c55e">${fmt$(earn)}</span> earned</span>`;
+  if(entries.length===0){el.innerHTML='<div class="empty"><div class="empty-icon">📋</div><div style="font-size:13px">No entries yet.</div></div>';return;}
   el.innerHTML=entries.map(e=>entryRowHTML(e)).join('');
 }
 
 function entryRowHTML(e){
   const color=COLORS[e.type]||'#6b7280';
-  const earn=(parseFloat(e.hours)||0)*(parseFloat(e.pay)||0);
+  const earn=dayEarnings(e);
+  const regH=parseFloat(e.regHours||e.hours||0);
+  const otH=parseFloat(e.otHours||0);
+  const hoursStr=otH>0?`${fmtH(regH)}h + <span class="ot-badge">${fmtH(otH)}h OT</span>`:`${fmtH(regH)}h`;
   return `<div class="entry-row" onclick="showDetail(${e.id})">
     <div class="entry-top">
-      <div><div class="entry-location">${e.location}</div><div class="entry-date">${e.date}</div></div>
-      <div class="entry-right"><div class="entry-hours">${fmtH(e.hours)}</div><div class="entry-pay">${fmt$(earn)}</div></div>
+      <div style="min-width:0;flex:1;margin-right:8px">
+        <div class="entry-location">${e.location}</div>
+        <div class="entry-date">${e.date}</div>
+      </div>
+      <div class="entry-right">
+        <div class="entry-hours">${hoursStr}</div>
+        <div class="entry-pay">${fmt$(earn)}</div>
+      </div>
     </div>
     <div class="entry-work">${e.work}</div>
     <span class="badge" style="background:${color}22;color:${color}">${e.type}</span>
@@ -305,36 +441,48 @@ function entryRowHTML(e){
 
 function showDetail(id){
   const e=entries.find(x=>x.id===id);if(!e)return;
-  currentDetail=id;
   const color=COLORS[e.type]||'#6b7280';
-  const earn=(parseFloat(e.hours)||0)*(parseFloat(e.pay)||0);
-  const fields=[['Jobsite Address',e.address],['Project Duration',e.duration],['Site Contact',e.contact],['Supervisor',e.supervisor],['Permit / Job #',e.permit],['Equipment Used',e.equipment]].filter(([,v])=>v);
+  const regH=parseFloat(e.regHours||e.hours||0);
+  const otH=parseFloat(e.otHours||0);
+  const regPay=regH*REG_RATE;const otPay=otH*OT_RATE;const total=regPay+otPay;
+  const fields=[['Jobsite Address',e.address],['Project Duration',e.duration],['Site Contact',e.contact],['Supervisor',e.supervisor]].filter(([,v])=>v);
   document.getElementById('detail-content').innerHTML=`
-    <div style="margin-bottom:16px"><div class="section-sub">${e.date}</div><div class="section-title">${e.location}</div><span class="badge" style="background:${color}22;color:${color}">${e.type}</span></div>
-    <div class="grid3" style="margin-bottom:12px">
-      <div class="stat-card" style="--accent:#ef4444"><div class="stat-label">Hours</div><div class="stat-num">${fmtH(e.hours)}</div></div>
-      <div class="stat-card" style="--accent:#22c55e"><div class="stat-label">Earned</div><div class="stat-num" style="font-size:20px">${fmt$(earn)}</div></div>
-      <div class="stat-card" style="--accent:#3b82f6"><div class="stat-label">Rate</div><div class="stat-num" style="font-size:20px">${fmt$(e.pay)}/h</div></div>
+    <div style="margin-bottom:14px">
+      <div class="section-sub">${e.date}</div>
+      <div class="section-title">${e.location}</div>
+      <span class="badge" style="background:${color}22;color:${color};margin-top:6px">${e.type}</span>
+    </div>
+    <div class="card" style="margin-bottom:10px">
+      <div class="stat-label" style="margin-bottom:10px">Pay Breakdown</div>
+      <div class="pay-row"><span class="pay-key">Regular — ${fmtH(regH)}h @ $${REG_RATE}/hr</span><span class="pay-val">${fmt$(regPay)}</span></div>
+      ${otH>0?`<div class="pay-row"><span class="pay-key">OT — ${fmtH(otH)}h @ $${OT_RATE}/hr <span class="ot-badge">1.5x</span></span><span class="pay-val">${fmt$(otPay)}</span></div>`:''}
+      <div class="pay-row total"><span class="pay-key">Day Total</span><span class="pay-val total">${fmt$(total)}</span></div>
     </div>
     ${fields.length?`<div class="card">${fields.map(([k,v])=>`<div class="detail-row"><span class="detail-key">${k}</span><span class="detail-val">${v}</span></div>`).join('')}</div>`:''}
     <div class="card"><div class="stat-label">Work Performed</div><div style="font-size:13px;color:#ccc;line-height:1.7;margin-top:8px">${e.work}</div></div>
+    ${e.photo?`<div class="card"><div class="stat-label">Job Site Photo</div><a href="${e.photo}" target="_blank" class="photo-link">📷 View Photo in Google Drive →</a></div>`:''}
     ${e.notes?`<div class="card"><div class="stat-label">Notes</div><div style="font-size:13px;color:#ccc;line-height:1.7;margin-top:8px">${e.notes}</div></div>`:''}
-    <button class="btn-delete" onclick="deleteEntry(${e.id})">Delete Entry</button>
+    <div style="margin-top:4px">
+      <button class="btn-edit" onclick="editEntry(${e.id})">✏️ Edit Entry</button>
+      <button class="btn-delete" onclick="deleteEntry(${e.id})">Delete Entry</button>
+    </div>
   `;
   showView('detail');
 }
 
 function deleteEntry(id){
+  if(!confirm('Delete this entry?'))return;
   entries=entries.filter(e=>e.id!==id);save();showView('log');showToast('Entry deleted.','error');
 }
 
 function showToast(msg,type='success'){
   const el=document.getElementById('toast');
-  el.textContent=msg;el.className='toast '+type;
-  setTimeout(()=>el.classList.add('hidden'),3000);
+  el.textContent=msg;el.className='toast '+type;el.style.display='block';
+  setTimeout(()=>{el.style.display='none';},3000);
 }
 
 load();
 </script>
+
 </body>
 </html>
